@@ -1,0 +1,110 @@
+@CHARSET "UTF-8";
+
+.td-left,.td-title,.td-title_,.td-url,.td-name_,.td-content,.td-content_,.td-goodsName_ {
+	text-align: left;
+	padding-left: 5px;
+}
+
+.td-right,.td-money_,.td-account_,.td-accountYes_,.td-price,.td-point,.td-vipPoint,.td-remain,.td-appCost,.td-applyMoney_,.td-actualMoney_,.td-fee_
+	{
+	text-align: right;
+	padding-right: 3px;
+}
+
+.td-pic img {
+	width: 30px;
+	height: 30px;
+	vertical-align: middle;
+}
+
+.total-stat {
+	font-family: "Courier New", "宋体";
+	padding-left: 10px;
+	background-color: #EFEFEF;
+	color: #009;
+	border-bottom: 1px dashed #dcdcdc;
+}
+
+.td-label {
+	max-width: 250px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.pay-logo {
+	margin: 3px;
+	width: 120px;
+	height: 32px;
+	vertical-align: middle;
+	border: 1px solid #eee;
+}
+
+#file_upload.uploadify {
+	display: inline-block;
+}
+
+.tab {
+	margin: 10px 0;
+	text-align: left;
+	border: 1px solid #50A05B;
+}
+
+.tab-header {
+	background-color: #E6F2E6;
+	height: 29px;
+	width: 100%;
+	border-bottom: 1px solid #50A05B;
+}
+
+.tab-header ul {
+	padding: 0;
+	margin: 0;
+	height: 30px;
+	overflow: hidden;
+}
+
+.tab-header li {
+	font-size: 16px;
+	height: 30px;
+	line-height: 29px;
+	float: left;
+	width: 80px;
+	text-align: center;
+	border-right: 1px solid #50A05B;
+	cursor: pointer;
+	list-style: none;
+	padding: 0 10px;
+}
+
+.tab-header li.active {
+	background: white;
+	font-weight: bold;
+}
+
+.tab-page {
+	display: none;
+	min-height: 150px;
+}
+
+.tab-body .active {
+	display: block;
+}
+
+.preview {
+	font-size: 20px;
+	color: #c30;
+}
+
+.tab-body img {
+	border: 1px dotted #ccc;
+	max-width: 150px;
+	max-height: 150px;
+	height: auto;
+	padding: 5px;
+	margin: 5px;
+}
+
+.tab-body img.selected {
+	border: 1px solid #c00;
+}

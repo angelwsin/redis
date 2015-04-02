@@ -1,0 +1,60 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/page/common/admin_header.jsp"%>
+<div class="wrap">
+	<div class="user">
+		<%@ include file="/WEB-INF/page/common/user_menu.jsp"%>
+		<x:js path="date" />
+		<div class="user-right">
+			<%@ include file="/WEB-INF/page/tab/leave_word_tab.jsp"%>
+			<div class="user-content">
+				<div class="post-form">
+					<form action="publish" method="post">
+						<div>
+							<x:text property="l.title_0" name="l.title" label="*留言标题" maxlength="30" cssClass="long" />
+						</div>
+						<div>
+							<x:textarea property="l.content_0" name="l.content" label="*留言内容" />
+						</div>
+						<x:ifMode excludes="view">
+							<div class="toolbar">
+								<input type="submit" value="提交留言" /><input type="button" onclick="history.back()" value="返回" />
+							</div>
+						</x:ifMode>
+						<x:ifMode excludes="edit">
+							<c:if test="${not empty l.replyContent}">
+								<div>
+									<x:textarea property="l.replyContent" label="留言回复"></x:textarea>
+								</div>
+								<div>
+									<x:text property="l.replyUser.username" label="留言回复人"></x:text>
+								</div>
+								<div class="toolbar">
+									<input type="button" onclick="history.back()" value="返回" />
+								</div>
+							</c:if>
+							<c:if test="${empty l.replyContent}">
+								<div>
+									<label>留言回复</label>：<span>暂未回复</span>
+								</div>
+								<div class="toolbar">
+									<input type="button" onclick="history.back()" value="返回" />
+								</div>
+							</c:if>
+						</x:ifMode>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<x:script>
+	<script type="text/javascript">
+		$(function() {
+			$("form").v("submit", {
+				"l.title" : "required",
+				"l.content" : "required"
+			});
+		});
+	</script>
+</x:script>
+<%@ include file="/WEB-INF/page/common/footer.jsp"%>

@@ -1,0 +1,44 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/page/common/mobile_header.jsp"%>
+<header class="header">
+	<div class="head">
+		<div class="top">
+			<h3>${__title}</h3>
+			<a class="back" onclick="history.back()"></a>
+		</div>
+	</div>
+</header>
+<section>
+	<form>
+		<div class="reg">
+			<ul>
+				<li><input class="login-l" type="text" id="userName" name="user.username" placeholder="用户名"></li>
+				<li><input class="login-l" type="password" type="password" id="password" name="user.password" placeholder="密码"></li>
+			</ul>
+			<div class="dl_btn">
+				<a href="javascript:void(0)" onclick="submitForm()">立即登录</a>
+			</div>
+			<div class="zc_btn">
+				<a href="${root}/mobile/register">免费注册</a>
+			</div>
+		</div>
+	</form>
+	<div class="forget_password">
+		<a href="${root}/mobile/findPwd">忘记密码</a>
+	</div>
+</section>
+<x:script>
+	<script type="text/javascript">
+		function submitForm() {
+			var $form = $("form");
+			var flag = $form.v({
+				"user.username" : "required",
+				"user.password" : "password"
+			});
+			if (flag) {
+				$.ajaxMessage("${root}/mobile/login?src=${param.src}", $form.serialize());
+			}
+		};
+	</script>
+</x:script>
+<%@ include file="/WEB-INF/page/common/mobile_footer.jsp"%>

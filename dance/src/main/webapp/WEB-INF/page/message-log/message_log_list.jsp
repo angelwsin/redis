@@ -1,0 +1,35 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/page/common/admin_header.jsp"%>
+<div class="wrap">
+	<div class="user">
+		<%@ include file="/WEB-INF/page/common/user_menu.jsp"%>
+		<x:js path="date" />
+		<div class="user-right">
+			<div class="user-title">收件箱</div>
+			<div class="user-content">
+				<div class="user-table">
+					<table class="table">
+						<tr>
+							<th>标题</th>
+							<th>内容</th>
+							<th>发送时间</th>
+						</tr>
+						<c:forEach var="ml" items="${page.list}">
+							<tr>
+								<td><c:if test="${ml.isRead==1}">
+										<a href="${root}/message-log/query?ml.id=${ml.id}">${ml.title}(已读)</a>
+									</c:if> <c:if test="${ml.isRead==0}">
+										<a href="${root}/message-log/query?ml.id=${ml.id}">${ml.title}<span style="color: red">(未读)</span></a>
+									</c:if></td>
+								<td>${ml.finalContent_}</td>
+								<td>${ml.message.sendTime_}</td>
+							</tr>
+						</c:forEach>
+					</table>
+					<x:page simple="true" />
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<%@ include file="/WEB-INF/page/common/footer.jsp"%>

@@ -1,0 +1,23 @@
+<%@ page language="java" pageEncoding="UTF-8"%>
+<%@ include file="/WEB-INF/page/common/admin_header.jsp"%>
+<div class="search-form">
+	<form action="${root}/admin/user/userPoint" method="get">
+		<x:text property="username" label="用户名" />
+		<x:select property="levelId" items="${levels}" itemLabel="value.levelName" itemValue="value.levelId" headerLabel="全部" headerValue="-1" label="信用等级" />
+		<a class="btn" href="javascript:void(0);" onclick="javascript:$('form').submit();">查询</a>
+	</form>
+</div>
+<div id="user_credit_table"></div>
+<x:script>
+	<script>
+		var t = new Table("积分列表", "username=用户名;levelName=信用等级;totalPoint=信用积分;uploadedCount=上传资料数;approvedCount=已审资料数;awaitCount=待审资料数", ${page.JSON});
+		t.rowTemplate("username", function() {
+			return this.user.username;
+		});
+		t.rowTemplate("levelName", function() {
+			return this.level.levelName;
+		});
+		
+			</script>
+</x:script>
+<%@ include file="/WEB-INF/page/common/admin_footer.jsp"%>
