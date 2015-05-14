@@ -12,6 +12,7 @@ public class ForwardController {
 	
 	@RequestMapping(value="/page/{forward}",method=RequestMethod.GET)
 	public String forword(@PathVariable String forward){
+		   System.out.println(forward);
 		   return forward;
 	}
 }
