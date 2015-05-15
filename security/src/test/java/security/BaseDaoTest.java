@@ -22,15 +22,15 @@ import com.wsin.security.util.UUIDUtils;
 @TransactionConfiguration(defaultRollback=false)
 public class BaseDaoTest {
 	
-	  private UserService<User> userServiceImpl;
+	  private UserService userServiceImpl;
 	  
 	  
 	 
-	public UserService<User> getUserServiceImpl() {
+	public UserService getUserServiceImpl() {
 		return userServiceImpl;
 	}
 	@Resource(name="userServiceImpl")
-	public void setUserServiceImpl(UserService<User> userServiceImpl) {
+	public void setUserServiceImpl(UserService userServiceImpl) {
 		this.userServiceImpl = userServiceImpl;
 	}
 	@Autowired

@@ -1,9 +1,11 @@
 package com.wsin.security.service;
 
-import com.wsin.security.dao.BaseDao;
+import com.wsin.security.bean.User;
 
-public interface UserService<T> extends BaseDao<T>{
+
+public interface UserService {
 	
+	public void save(User user);
 	
 
 }
