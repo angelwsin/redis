@@ -1,7 +1,9 @@
 package security;
 
 import javax.annotation.Resource;
+import javax.transaction.Transaction;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.wsin.security.bean.User;
 import com.wsin.security.service.UserService;
@@ -46,6 +49,7 @@ public class BaseDaoTest {
 		  user.setPassword("wq521");
 		  user.setRoles(null);
 		  user.setStatus(1);
+		
 		  userServiceImpl.save(user);
 		  
 	 }
