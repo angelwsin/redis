@@ -7,6 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -82,7 +83,7 @@ public class User implements Serializable{
 	 //一对多方式
 	 //@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, mappedBy = "category")
 	//inverseJoinColumns中对应的id为以下属性Role的对应id.
-	@ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
+	@ManyToMany(cascade={CascadeType.ALL,CascadeType.PERSIST,CascadeType.REMOVE,CascadeType.MERGE},fetch=FetchType.EAGER)
 	@JoinTable(name="user_role" ,joinColumns={@JoinColumn(name="id")},inverseJoinColumns={@JoinColumn(name="rid")}) 
 	public Set<Role> getRoles() {
 		return roles;

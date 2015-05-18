@@ -53,14 +53,14 @@ public class Authority implements Serializable{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	@ManyToMany(cascade=CascadeType.REFRESH,mappedBy="anthorities")
+	@ManyToMany(cascade=CascadeType.ALL,mappedBy="anthorities")
 	public Set<Role> getRoles() {
 		return roles;
 	}
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
-	@ManyToMany(cascade={CascadeType.PERSIST,CascadeType.MERGE},fetch=FetchType.LAZY)
+	@ManyToMany(cascade={CascadeType.ALL,CascadeType.MERGE},fetch=FetchType.EAGER)
 	@JoinTable(name="authorities_resources" ,joinColumns={@JoinColumn(name="id")},inverseJoinColumns={@JoinColumn(name="rid")}) 
 	public Set<Resource> getResources() {
 		return resources;

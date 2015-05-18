@@ -58,7 +58,7 @@ public class Resource implements Serializable{
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	@ManyToMany(cascade=CascadeType.REFRESH,mappedBy="resources")
+	@ManyToMany(cascade=CascadeType.ALL,mappedBy="resources")
 	public Set<Authority> getAuthorities() {
 		return authorities;
 	}

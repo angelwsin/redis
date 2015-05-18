@@ -6,6 +6,7 @@ import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -59,14 +60,14 @@ public class Role implements Serializable{
 	//mappedBy相当于过去的inverse="true".
 	//mappedBy 关系的维护端相当于过去的inverse="true".
 	//此处使用属性名
-	@ManyToMany(cascade=CascadeType.PERSIST,mappedBy="roles")
+	@ManyToMany(cascade={CascadeType.ALL,CascadeType.REFRESH},mappedBy="roles")
 	public Set<User> getUsers() {
 		return users;
 	}
 	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
-	@ManyToMany(cascade=CascadeType.REFRESH)
+	@ManyToMany(cascade={CascadeType.ALL,CascadeType.MERGE},fetch=FetchType.EAGER)
 	@JoinTable(name="role_authorities" ,joinColumns={@JoinColumn(name="id")},inverseJoinColumns={@JoinColumn(name="aid")}) 
 	public Set<Authority> getAnthorities() {
 		return anthorities;
