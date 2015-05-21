@@ -24,7 +24,7 @@ import com.wsin.security.service.UserService;
 import com.wsin.security.util.UUIDUtils;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration("classpath*:applicationContext-*.xml")
+@ContextConfiguration("classpath*:applicationContext-context.xml")
 @TransactionConfiguration(defaultRollback=false)
 public class BaseDaoTest {
 	
@@ -52,12 +52,12 @@ public class BaseDaoTest {
 	 public void testSession(){
 		  System.out.println(sessionFactory==null);
 	 }
-	//@Test
+	@Test
 	 public void testBaseDao(){
 		  com.wsin.security.bean.Resource resource = new com.wsin.security.bean.Resource();
 		  resource.setId(UUIDUtils.getUUID());
 		  resource.setName("欢迎页");
-		  resource.setContent("/page/welcome");
+		  resource.setContent("/index");
 		  resource.setStatus(1);
 		  resource.setType("url");
 		  Set<com.wsin.security.bean.Resource> resources = new HashSet<com.wsin.security.bean.Resource>();
@@ -74,8 +74,8 @@ public class BaseDaoTest {
 		  
 		  Role  role = new Role();
 		  role.setId(UUIDUtils.getUUID());
-		  role.setCode("admin");
-		  role.setRoleName("管理员");
+		  role.setCode("user");
+		  role.setRoleName("普通用户");
 		  role.setStatus(1);
 		  role.setAnthorities(authorities);
 		  Set<Role> roles = new HashSet<Role>();
@@ -84,9 +84,9 @@ public class BaseDaoTest {
 		  
 		  User user = new User();
 		  user.setId(UUIDUtils.getUUID());
-		  user.setUsername("admin");
+		  user.setUsername("zhangsan");
 		  user.setEmail("angelwsin@163.com");
-		  user.setPassword("wq521");
+		  user.setPassword("111111");
 		  user.setRoles(null);
 		  user.setStatus(1);
 		 Set<User> users = new HashSet<User>();
@@ -98,6 +98,8 @@ public class BaseDaoTest {
 		 
 		  
 	 }
+	 
+	 
 	 //@Test 
 	public void tesQuery(){
 		User user=  userServiceImpl.getUserById(userServiceImpl.getUserByUsername("admin").getId());
@@ -112,7 +114,7 @@ public class BaseDaoTest {
 	
 		
 	}
-	@Test
+	//@Test
  public void testQ(){
 	    System.out.println(securityServiceImpl.findAll().get(0).getCode());
 	}

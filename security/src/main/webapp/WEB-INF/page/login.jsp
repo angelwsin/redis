@@ -7,6 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-   login
+     <form action="${loginUrl}" method="post">
+        username:<input type="text" name="username"><br>
+        password:<input type="password" name="password"><br>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+        <input type="submit" value="登录">
+     </form>
 </body>
 </html>

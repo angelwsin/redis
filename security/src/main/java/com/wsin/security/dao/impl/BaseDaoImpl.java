@@ -11,9 +11,11 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.security.access.ConfigAttribute;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.wsin.security.bean.Authority;
 import com.wsin.security.dao.BaseDao;
 /*
  * Hibernate3 dao层支持事物  Hibernate4 dao层不支持事物
@@ -77,5 +79,6 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 		}
 		return (List<T>)criteria.list();
 	}
+	
 	
 }

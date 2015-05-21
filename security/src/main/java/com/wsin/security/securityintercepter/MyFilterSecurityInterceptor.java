@@ -2,6 +2,7 @@ package com.wsin.security.securityintercepter;
 
 import java.io.IOException;
 
+import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
@@ -14,12 +15,13 @@ import org.springframework.security.access.intercept.InterceptorStatusToken;
 import org.springframework.security.web.FilterInvocation;
 import org.springframework.security.web.access.intercept.FilterInvocationSecurityMetadataSource;
 
-public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor {
+public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor implements Filter{
 
 	private FilterInvocationSecurityMetadataSource securityMetadataSource;
 	 
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
+		  System.out.println("doFilter----");
 		FilterInvocation fi = new FilterInvocation(request, response, chain);
 		invoke(fi);
 	}

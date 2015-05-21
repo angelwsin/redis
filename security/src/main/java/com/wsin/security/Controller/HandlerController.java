@@ -11,7 +11,6 @@ public class HandlerController {
 	
 	@RequestMapping(value="/{index}",method=RequestMethod.GET)
 	  public String index(@PathVariable("index")String index){
-		 System.out.println("index");
 		 return "page/"+index;  
 	  }
 	

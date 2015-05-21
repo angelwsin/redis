@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+      <a href="j_spring_security_logout">退出</a><%=request.getSession().getAttribute("currentUser")%>
       welcome
 </body>
 </html>

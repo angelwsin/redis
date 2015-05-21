@@ -8,34 +8,41 @@
            http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 	
 	<beans:description>SpringSecurity安全配置</beans:description>
-	
+	<debug /> 
 	 <http pattern="/css/**" security="none"/>
 	 <http pattern="/images/**" security="none"/>
 	 <http pattern="/js/**" security="none"/>
-	 <http pattern="/login.jsp" security="none"/>
+	 <http pattern="/page/login.jsp" security="none"/>
 	<!-- http安全配置 -->
- 	 <http auto-config="true">
-		<!--
-		<intercept-url pattern="/index.jsp"  access="ROLE_USER"/>
-		<intercept-url pattern="/main.jsp"  access="ROLE_ADAMIN"/>
-	    -->
-		<form-login login-page="/login.jsp" default-target-url="/index.jsp"
-			 authentication-failure-url="/login.jsp?error=1" />
-		<!-- 尝试访问没有权限的页面时跳转的页面 -->   
-		<access-denied-handler error-page="/common/403.jsp"/> 
+ 	 <http use-expressions="true" entry-point-ref="loginEntryPoint" >
+ 	 
+ 	 <!-- 尝试访问没有权限的页面时跳转的页面 -->   
+		<access-denied-handler error-page="/show"/> 
 		
-		<logout logout-success-url="/login.jsp" />
+		 <logout invalidate-session="true"  
+      logout-success-url="/login"  
+      logout-url="/j_spring_security_logout"/>  
 		 
+ 	 
 		 <session-management>
         	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
    		 </session-management>
-
+   		 <logout logout-url="/logout"/>
+         <custom-filter ref="defLoginFilter" position="FORM_LOGIN_FILTER"/>
 		<!-- 增加一个filter，这点与Acegi是不一样的，不能修改默认的filter了，
 		这个filter位于FILTER_SECURITY_INTERCEPTOR之前  -->
          <custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
        
 	 </http>
 
+    <beans:bean  id="defLoginFilter" class="com.wsin.security.securityintercepter.DefLonginFilter">
+        <beans:property name="authenticationManager" ref="authenticationManager"></beans:property>
+        <beans:property name="authenticationSuccessHandler">
+          <beans:bean class="com.wsin.security.handler.DefLoginSuccessHandler">
+            <beans:property name="loginURL" value="index"></beans:property>
+          </beans:bean>
+        </beans:property>
+    </beans:bean>
 	<!-- 一个自定义的filter，必须包含authenticationManager,accessDecisionManager,securityMetadataSource三个属性，
     	我们的所有控制将在这三个类中实现，解释详见具体配置  -->
     <beans:bean id="myFilter" class="com.wsin.security.securityintercepter.MyFilterSecurityInterceptor">
@@ -72,7 +79,9 @@
           <beans:constructor-arg ref="securityServiceImpl"/>
     </beans:bean>
     
- 	    
+ 	    <beans:bean id="loginEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+ 	       <beans:constructor-arg value="/login"></beans:constructor-arg>
+ 	    </beans:bean>
     <!-- 定义国际化 -->
     <beans:bean id="messageSource"
    		 class="org.springframework.context.support.ReloadableResourceBundleMessageSource">

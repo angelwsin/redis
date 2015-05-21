@@ -32,7 +32,7 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 	public User getUserByUsername(String username) {
 		// TODO Auto-generated method stub
 		Criteria criteria=getSession().createCriteria(User.class).add(Restrictions.eq("username", username));
-		 if(criteria.list()!=null){
+		 if(criteria.list()!=null&&criteria.list().size()>0){
 			 return (User) criteria.list().get(0);
 		 }else {
 			return  null;

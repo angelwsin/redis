@@ -29,6 +29,9 @@ public class DefUserService implements UserDetailsService {
 			throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		 User user =securityServiceImpl.getUserByUsername(username);
+		 if(user==null){
+			 throw new UsernameNotFoundException("用户不存在!");
+		 }
 		UserDetails userDetails =(UserDetails) new org.springframework.security.core.userdetails.User(username, user.getPassword(), 
 				true, true, true, true, securityServiceImpl.findGrantedAuthorityByUser(user));
 		return userDetails;

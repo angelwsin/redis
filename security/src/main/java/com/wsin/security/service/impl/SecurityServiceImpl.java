@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.access.ConfigAttribute;
+import org.springframework.security.access.SecurityConfig;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
@@ -54,7 +56,10 @@ public class SecurityServiceImpl implements SecurityService {
 
 	public List<GrantedAuthority> findGrantedAuthorityByUser(User user) {
 		// TODO Auto-generated method stub
-		     List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
+		  if(userServiceImpl.getUserByUsername(user.getUsername())==null){
+			  return null;
+		  }
+		 List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		    for(Role role:userServiceImpl.getUserById(userServiceImpl.getUserByUsername(user.getUsername()).getId()).getRoles()){
 		    	      for(Authority authority:role.getAnthorities()){
 		    	    	   authorities.add(new SimpleGrantedAuthority(authority.getCode())) ;
@@ -74,6 +79,15 @@ public class SecurityServiceImpl implements SecurityService {
 			Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return resourceDaoImpl.findObjectByMap(map);
+	}
+	
+	public List<ConfigAttribute> getAllAttributes(){
+		     List<ConfigAttribute> list = new ArrayList<ConfigAttribute>();
+		     for(Authority authority:findAll()){
+		    	  ConfigAttribute configAttribute = new SecurityConfig(authority.getCode());
+		    	  list.add(configAttribute);
+		     }
+		     return list;
 	}
 	
 	

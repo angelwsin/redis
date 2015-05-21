@@ -20,6 +20,10 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
     public void decide(Authentication authentication, Object object,
             Collection<ConfigAttribute> configAttributes)
             throws AccessDeniedException, InsufficientAuthenticationException {
+    	 System.out.println("decide invoke");
+    	 /*
+    	  * 对不再Resource中的路径放行
+    	  */
         if(configAttributes == null){
             return ;
         }
@@ -28,6 +32,7 @@ public class MyAccessDecisionManager implements AccessDecisionManager {
         while(ite.hasNext()){
             ConfigAttribute ca=ite.next();
             String needRole=((SecurityConfig)ca).getAttribute();
+            System.out.println("");
             for(GrantedAuthority ga:authentication.getAuthorities()){
                 if(needRole.equals(ga.getAuthority())){  //ga is user's role.
                     return;
