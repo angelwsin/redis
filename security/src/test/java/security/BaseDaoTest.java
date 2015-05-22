@@ -56,15 +56,15 @@ public class BaseDaoTest {
 	 public void testBaseDao(){
 		  com.wsin.security.bean.Resource resource = new com.wsin.security.bean.Resource();
 		  resource.setId(UUIDUtils.getUUID());
-		  resource.setName("欢迎页");
-		  resource.setContent("/index");
+		  resource.setName("退出页");
+		  resource.setContent("/logout");
 		  resource.setStatus(1);
 		  resource.setType("url");
 		  Set<com.wsin.security.bean.Resource> resources = new HashSet<com.wsin.security.bean.Resource>();
 		  resources.add(resource);
 		  Authority authority = new Authority();
-		  authority.setAnthorityName("查看");
-		  authority.setCode("query");
+		  authority.setAnthorityName("修改");
+		  authority.setCode("logout");
 		  authority.setId(UUIDUtils.getUUID());
 		  authority.setResources(resources);
 		  authority.setStatus(1);
@@ -82,18 +82,20 @@ public class BaseDaoTest {
 		  roles.add(role);	
 		  authority.setResources(resources);
 		  
-		  User user = new User();
-		  user.setId(UUIDUtils.getUUID());
-		  user.setUsername("zhangsan");
-		  user.setEmail("angelwsin@163.com");
-		  user.setPassword("111111");
-		  user.setRoles(null);
-		  user.setStatus(1);
+//		  User user = new User();
+//		  user.setId(UUIDUtils.getUUID());
+//		  user.setUsername("wsin");
+//		  user.setEmail("angelwsin@163.com");
+//		  user.setPassword("111111");
+//		  user.setRoles(null);
+//		  user.setStatus(1);
+		  User user=  userServiceImpl.getUserById(userServiceImpl.getUserByUsername("admin").getId());
 		 Set<User> users = new HashSet<User>();
 		 users.add(user);
 		 role.setUsers(users);
 		 user.setRoles(roles);
-		  userServiceImpl.save(user);
+	     userServiceImpl.saveOrUpdate(user);
+		 // userServiceImpl.save(user);
 		  //authorityService.save(authority);
 		 
 		  
@@ -116,7 +118,7 @@ public class BaseDaoTest {
 	}
 	//@Test
  public void testQ(){
-	    System.out.println(securityServiceImpl.findAll().get(0).getCode());
+	 User user=  userServiceImpl.getUserById(userServiceImpl.getUserByUsername("admin").getId());
 	}
 	
 

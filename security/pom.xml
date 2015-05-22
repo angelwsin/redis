@@ -16,7 +16,7 @@
 	</properties>
   
   <dependencies>
-
+       
 		<dependency>
 			<groupId>javax.servlet.jsp</groupId>
 			<artifactId>jsp-api</artifactId>
@@ -127,11 +127,7 @@
 			<version>3.11</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.apache.struts</groupId>
-			<artifactId>struts2-spring-plugin</artifactId>
-			<version>${struts.version}</version>
-		</dependency>
+		
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -265,7 +261,5 @@
 	<version>1.2</version>
 </dependency>
   </dependencies>
-  <build>
-    <finalName>sucurity</finalName>
-  </build>
+  
 </project>

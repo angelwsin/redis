@@ -7,5 +7,6 @@ public interface BaseDao<T> {
 	 public void save(T entiry);
 	 public List<T> findAll();
 	 public List<T> findObjectByMap(Map<String,Object> map);
+	 public void saveOrUpdate(T entiry);
 
 }

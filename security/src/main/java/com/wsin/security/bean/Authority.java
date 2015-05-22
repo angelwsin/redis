@@ -13,6 +13,8 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import org.springframework.security.web.authentication.logout.LogoutFilter;
+
 @SuppressWarnings("serial")
 @Entity
 @Table(name="authorities")

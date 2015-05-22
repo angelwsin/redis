@@ -13,6 +13,7 @@ public interface UserService {
 	public List<Authority> findAuthorityByUser(User user);
 	public User getUserById(Serializable id);
 	public User getUserByUsername(String username) ;
+	 public void saveOrUpdate(User user);
 	
 
 }

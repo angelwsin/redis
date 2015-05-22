@@ -81,4 +81,9 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 	}
 	
 	
+	 public void saveOrUpdate(T entiry){
+		   getSession().saveOrUpdate(entiry);
+	 }
+	
+	
 }

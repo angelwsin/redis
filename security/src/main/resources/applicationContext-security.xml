@@ -8,7 +8,7 @@
            http://www.springframework.org/schema/security/spring-security-4.0.xsd">
 	
 	<beans:description>SpringSecurity安全配置</beans:description>
-	<debug /> 
+	<!-- <debug />  -->
 	 <http pattern="/css/**" security="none"/>
 	 <http pattern="/images/**" security="none"/>
 	 <http pattern="/js/**" security="none"/>
@@ -17,7 +17,7 @@
  	 <http use-expressions="true" entry-point-ref="loginEntryPoint" >
  	 
  	 <!-- 尝试访问没有权限的页面时跳转的页面 -->   
-		<access-denied-handler error-page="/show"/> 
+		<access-denied-handler error-page="/denied"/> 
 		
 		 <logout invalidate-session="true"  
       logout-success-url="/login"  
@@ -27,12 +27,14 @@
 		 <session-management>
         	<concurrency-control max-sessions="1" error-if-maximum-exceeded="true" />
    		 </session-management>
-   		 <logout logout-url="/logout"/>
+   		  
          <custom-filter ref="defLoginFilter" position="FORM_LOGIN_FILTER"/>
 		<!-- 增加一个filter，这点与Acegi是不一样的，不能修改默认的filter了，
 		这个filter位于FILTER_SECURITY_INTERCEPTOR之前  -->
          <custom-filter ref="myFilter" before="FILTER_SECURITY_INTERCEPTOR"/>
-       
+        <logout invalidate-session="true"  
+                logout-success-url="/"  
+                       logout-url="/logout"/>
 	 </http>
 
     <beans:bean  id="defLoginFilter" class="com.wsin.security.securityintercepter.DefLonginFilter">
