@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+	<!-- Struts全局常量配置 -->
+	<!-- <constant name="struts.enable.DynamicMethodInvocation" value="false" /> -->
+	<!-- <constant name="struts.i18n.encoding" value="UTF-8" /> -->
+	<constant name="struts.action.extension" value="html," />
+	<!-- <constant name="struts.objectFactory" value="spring" /> -->
+	<constant name="struts.ui.theme" value="simple" />
+	<!-- <constant name="struts.mapper.alwaysSelectFullNamespace" value="true" /> -->
+	<constant name="struts.serve.static" value="false" />
+	
+	<!--保证UEditor编辑器上传文件不被struts2干掉，自定义过滤器  -->
+	<constant name="struts.action.excludePattern" value="/public/.*" />
+
+	
+	<!-- ********** 开发模式设置 -->
+	
+	<!-- 设置Struts为开发模式，请在移至正式环境后，将Struts.devMode改为false -->
+	<!-- <constant name="struts.devMode" value="true" /> -->
+	<!-- 更改Struts配置文件，自动重新加载 -->
+	<!-- <constant name="struts.configuration.xml.reload" value="true" /> -->
+	
+	<!-- 开发模式设置 ********** -->
+	
+	
+	<!-- ********** Struts convention 插件配置  
+	相关介绍  http://struts.apache.org/release/2.3.x/docs/convention-plugin.html -->
+	
+	<!-- 禁用基于locators的包扫描 -->
+	<constant name="struts.convention.package.locators.disable" value="true" />
+	
+	<!-- (基于locators)扫描包含哪些字符串的包中的action类(默认为："action,actions,struts,struts2") -->
+	<!-- <constant name="struts.convention.package.locators" value="action" /> -->
+	
+	<!-- (基于locators)只扫描哪些包中的action类 (默认为："")-->
+	<!-- <constant name="struts.convention.package.locators.basePackage" value="me.ready.action" /> -->
+	
+	<!-- 在哪些包中扫描action类(无需匹配locators) -->
+	<constant name="struts.convention.action.packages" value="com.p2p.action" />
+	
+	<!-- action类以什么字符串为后缀(默认为："Action") -->
+	<!-- <constant name="struts.convention.action.suffix" value="Action" /> -->
+	
+	<!-- action mapping继承的默认父包(默认为："convention-default") -->
+	<constant name="struts.convention.default.parent.package" value="p2p" />
+	
+	<!-- 是否将action name转为小写形式(默认为："true") -->
+	<!-- <constant name="struts.convention.action.name.lowercase" value="true" /> -->
+	
+	<!-- result文件的所在路径(默认为："/WEB-INF/content/") -->
+	<constant name="struts.convention.result.path" value="/WEB-INF/page/" />
+	
+	<!-- result的type类型(默认为："dispatcher,velocity,freemarker") -->
+	<constant name="struts.convention.relative.result.types" value="dispatcher" />
+	
+	<!-- Struts convention 插件配置 ********** -->
+	
+	
+	<!-- ********** Struts ready 插件配置 -->
+	
+	<!-- 是否启用struts-ready-plugin -->
+	<!-- <constant name="struts.ready.enable" value="true" /> -->
+	<!-- 默认的action名称 -->
+	<!-- <constant name="struts.ready.default.action" value="default" /> -->
+	<!-- 默认的method名称 -->
+	<!-- <constant name="struts.ready.default.method" value="index" /> -->
+	<!-- session中存放用户信息的key值 -->
+	<constant name="struts.ready.sessionUserKey" value="sessionUser" />
+	<!-- 是否启用权限拦截器 -->
+	<!-- <constant name="struts.ready.enable.permission" value="true" /> -->
+	<!-- 是否启用默认的action和method -->
+	<!-- <constant name="struts.ready.enable.default" value="true" /> -->
+	
+	<!--  Struts ready 插件配置 ********** -->
+	
+	<!-- 公共父包，其他包均继承此包，而无需继承struts-default -->
+	<package name="p2p" abstract="true" extends="ready-default">
+		<interceptors>
+			
+			<interceptor-stack name="p2pStack">
+				<interceptor-ref name="ready" />
+			
+			
+				
+				<interceptor-ref name="permission" />
+				
+				<!-- 给参数取别名 -->
+                <!-- <interceptor-ref name="alias"/> -->
+                
+                <interceptor-ref name="servletConfig"/>
+                
+                <!-- 国际化配置 -->
+               	<!--  <interceptor-ref name="i18n"/> -->
+               	
+               	<!-- 执行预处理方法prepare -->
+               	<!--  <interceptor-ref name="prepare"/> -->
+               	
+                <interceptor-ref name="chain"/>
+                <!-- <interceptor-ref name="scopedModelDriven"/> -->
+                <!-- <interceptor-ref name="modelDriven"/> -->
+                <interceptor-ref name="fileUpload"/>
+                <interceptor-ref name="checkbox"/>
+                <!-- <interceptor-ref name="datetime"/> -->
+                <interceptor-ref name="multiselect"/>
+                <interceptor-ref name="staticParams"/>
+                <interceptor-ref name="actionMappingParams"/>
+                <interceptor-ref name="params">
+                	<!-- 无需处理action:和method:前缀 -->
+                    <!-- <param name="excludeParams">^action:.*,^method:.*</param> -->
+                </interceptor-ref>
+                
+                <!-- <interceptor-ref name="conversionError"/> -->
+                
+                <!-- 执行 action-validation.xml 中配置的验证器 -->
+                <!-- <interceptor-ref name="validation">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref> -->
+                
+                <!-- workflow执行validate方法 -->
+                <!-- <interceptor-ref name="workflow">
+                    <param name="excludeMethods">input,back,cancel,browse</param>
+                </interceptor-ref> -->
+                
+                <interceptor-ref name="debugging"/>
+                <interceptor-ref name="deprecation"/>
+                
+				<!-- <interceptor-ref name="defaultStack">
+					<param name="exception.logEnabled">true</param>
+					<param name="exception.logLevel">error</param>
+				</interceptor-ref> -->
+			</interceptor-stack>
+		</interceptors>
+		
+		<!-- 默认的拦截器栈 -->
+		<default-interceptor-ref name="p2pStack" />
+	
+		<!-- 默认Action类 -->
+		<default-class-ref class="me.ready.struts2.ReadyActionSupport" />
+		
+		<!-- 全部result配置 -->
+		<global-results>
+			<!-- 全局信息提示页面 -->
+			<result name="global_message">/WEB-INF/page/common/message.jsp</result>
+			<result name="global_error">/WEB-INF/page/common/error.jsp</result>
+			
+			<result name="global_redirect" type="redirect">${__url}</result>
+			
+			<result name="global_predirect" type="redirect">
+				<param name="statusCode">301</param>
+				<param name="location">${__url}</param>
+			</result>
+			
+			<result name="global_redirect_action" type="redirectAction">${__action}</result>
+
+			<!-- 文件下载全局result -->
+			<result name="global_download" type="stream">
+				<param name="contentType">application/octet-stream;charset=ISO-8859-1</param>
+				<param name="inputName">__is</param>
+				<param name="contentDisposition">attachment;filename="${__file}"</param>
+				<param name="bufferSize">4096</param>
+			</result>
+
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping result="global_error" exception="java.lang.Exception" />
+		</global-exception-mappings>
+		
+	</package>	
+</struts>

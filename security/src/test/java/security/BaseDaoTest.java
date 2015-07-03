@@ -19,6 +19,7 @@ import com.wsin.security.bean.User;
 import com.wsin.security.service.AuthorityService;
 import com.wsin.security.service.ResourceService;
 import com.wsin.security.service.RoleService;
+import com.wsin.security.service.SMSService;
 import com.wsin.security.service.SecurityService;
 import com.wsin.security.service.UserService;
 import com.wsin.security.util.UUIDUtils;
@@ -37,6 +38,8 @@ public class BaseDaoTest {
 	  private ResourceService resourceService;
 	  @Autowired
 	  private SecurityService securityServiceImpl;
+	  @Autowired
+	  private SMSService smsServiceImpl;
 	 
 	public UserService getUserServiceImpl() {
 		return userServiceImpl;
@@ -52,7 +55,7 @@ public class BaseDaoTest {
 	 public void testSession(){
 		  System.out.println(sessionFactory==null);
 	 }
-	@Test
+	//@Test
 	 public void testBaseDao(){
 		  com.wsin.security.bean.Resource resource = new com.wsin.security.bean.Resource();
 		  resource.setId(UUIDUtils.getUUID());
@@ -120,6 +123,12 @@ public class BaseDaoTest {
  public void testQ(){
 	 User user=  userServiceImpl.getUserById(userServiceImpl.getUserByUsername("admin").getId());
 	}
+ 
+ @Test
+  public void send(){
+	String  result=  smsServiceImpl.sendSMS(SMSService.URL, SMSService.USERID, SMSService.ACCOUNT, SMSService.PASSWORD, "18505126939", "在吗！");
+	  System.out.println(result);
+  }
 	
 
 }
